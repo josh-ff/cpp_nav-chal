@@ -16,8 +16,6 @@ using namespace std;
 
 class ANode : public Node {
 	public:
-		// Constructor takes inital map node + the estimated cost to current goal
-		ANode(Node n, int est_cost) : Node(n), estimated_cost_(est_cost), cost_to_(numeric_limits<int>::max()) {}
 		// Constructor takes inital map node + the estimated cost to current goal + current cost to
 		ANode(Node n, int est_cost, int cost_to) : Node(n), estimated_cost_(est_cost), cost_to_(cost_to) {}
 		// Ensure that "cost to node" can only be updated when providing a new path to that node (through another node) 
@@ -36,7 +34,7 @@ class ANode : public Node {
 		int estimated_cost_;
 		int cost_to_;
 		// previous node correlated to current "cost to node" 
-		ANode prev_;
+		Node prev_;
 };
 
 class PathFinder {
@@ -51,7 +49,7 @@ private:
 	GMap& map_;
 	// goal tracking
 	Node current_goal_;
-	ANode current_ANode_;
+	Node current_Node_;
 
 	vector<Node> completedGoals_;
 	vector<Node> unvisitedGoals_; 
